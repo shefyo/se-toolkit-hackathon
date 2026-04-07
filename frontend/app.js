@@ -1,4 +1,5 @@
 // All API calls go through nginx reverse proxy at /api/
+// The API base URL is relative, so it works both locally and behind a proxy
 const API = "/api";
 
 // ==================== TAB NAVIGATION ====================
