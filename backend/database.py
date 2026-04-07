@@ -9,6 +9,7 @@ logger = logging.getLogger("smartreceipt.db")
 # ==================== DB PATH ====================
 # Inside Docker: WORKDIR=/app → data/smartreceipt.db resolves to /app/data/smartreceipt.db
 # Volume mount: ./data:/app/data → persists on host
+# Default DB path can be overridden via DATABASE_PATH environment variable
 DB_PATH = os.environ.get(
     "DATABASE_PATH",
     os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "smartreceipt.db"),

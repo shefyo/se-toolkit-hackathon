@@ -61,6 +61,7 @@ except Exception as e:
 
 # ==================== APP ====================
 
+# FastAPI application instance with version 2.0.0
 app = FastAPI(title="SmartReceipt API", version="2.0.0")
 
 app.add_middleware(
