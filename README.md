@@ -5,12 +5,23 @@
 ---
 
 ## 📸 Demo
-
+>
+> ## Web Interface
 > ![Dashboard](image.png)
 > ![Expenses](image-1.png)
 > ![Analytics](image-2.png)
 > ![AI Advice](image-3.png)
 > ![Chat Assistant](image-4.png)
+>
+> ## Telegram Bot
+> <img width="869" height="928" alt="image" src="https://github.com/user-attachments/assets/eabcc852-28f6-408f-b902-c045bef107fc" />
+<img width="869" height="928" alt="image" src="https://github.com/user-attachments/assets/c4f2945b-5c8a-4519-b383-2c96dc4d3024" />
+<img width="1070" height="919" alt="image" src="https://github.com/user-attachments/assets/d10b36e6-533c-4ae1-9e1c-2b247a740f50" />
+<img width="799" height="364" alt="image" src="https://github.com/user-attachments/assets/702eb7c3-4b39-43bb-b534-285f151ae9d7" />
+
+
+
+
 
 ---
 
@@ -74,6 +85,33 @@ SmartReceipt/
 ├── requirements.txt         # Python dependencies
 └── .env.example             # Environment variables template
 ```
+
+### Architecture Overview
+
+```
+  +----------------+
+   | Telegram Bot   |
+   |   (aiogram)    |
+   +-------+--------+
+           |
+           v
+   +-------+--------+
+   |    Backend     |
+   |   FastAPI      |
+   |  Python 3.11   |
+   +-------+--------+
+           |
+  +--------+--------+
+  |                 |
+  v                 v
+
++-----------+ +-----------+
+| PostgreSQL| | Frontend |
+| Database | | React+Vite|
+| (asyncpg)| | Tailwind |
++-----------+ +-----------+
+```
+
 
 ---
 
@@ -313,12 +351,29 @@ docker-compose up --build -d
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `TELEGRAM_BOT_TOKEN` | Yes (for bot) | — | From @BotFather |
-| `LLM_API_KEY` | No | — | OpenAI-compatible API key |
+| `LLM_API_KEY` | No | — | LLM API key |
 | `LLM_BASE_URL` | No | `https://openrouter.ai/api/v1` | API endpoint |
 | `LLM_MODEL` | No | `stepfun/step-3.5-flash:free` | Model name |
-| `BACKEND_URL` | Yes (for bot) | `http://localhost:8000` | Backend URL |
+| `BACKEND_URL` | Yes (for bot) | `http://backend:8000` | Backend URL |
 
 ---
+### Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| **Backend** | Python 3.11, FastAPI, SQLAlchemy (async), asyncpg |
+| **Database** | PostgreSQL 16 |
+| **Bot** | aiogram 3.x, OpenRouter (free LLM) |
+| **Frontend** | React 18, Vite, Tailwind CSS, Axios |
+| **DevOps** | Docker, Docker Compose, Nginx (multi-stage build) |
+
+### Services & Ports
+
+| Service | Port | Description |
+|---------|------|-------------|
+| frontend | 3000 | Web dashboard (nginx) |
+| backend  | 8000 | FastAPI REST API |
+| bot      | —    | Telegram bot (no exposed port) |
 
 ## 📌 Summary
 
